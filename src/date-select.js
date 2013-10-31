@@ -5,14 +5,14 @@ angular.module('dateSelect', [])
   .directive('dateSelect', [function () {
     var template = [
       '<div class="date-select">',
-        '<select ng-model="day" ng-options="d for d in days">',
-          '<option value="">Day</option>',
+        '<select ng-model="val.date", ng-options="d for d in dates">', 
+          '<option value disabled selected>Day</option>',
         '</select>',
-        '<select ng-model="month" ng-options="m.value as m.name for m in months">',
-          '<option value="">Month</option>',
+        '<select ng-model="val.month", ng-options="m.value as m.name for m in months">', 
+          '<option value disabled>Month</option>',
         '</select>',
-        '<select ng-model="year" ng-options="y for y in years">',
-          '<option value="">Year</option>',
+        '<select ng-model="val.year" ng-options="y for y in years">', 
+          '<option value disabled selected>Year</option>',
         '</select>',
       '</div>'
     ];
@@ -27,7 +27,7 @@ angular.module('dateSelect', [])
 
       return years;
     }
-        
+
     function makeMonths () {
       // We're starting months from 1 rather than 0 to permit easier boolean testing
       var months = [];
@@ -43,16 +43,16 @@ angular.module('dateSelect', [])
       return months;
     }
 
-    function makeDays (year, month) {
-      var numDays = year && month ? moment([year, month-1]).daysInMonth() : 31;
+    function makeDates (year, month) {
+      var numDates = year && month ? moment([year, month-1]).daysInMonth() : 31;
 
-      var days = [];
+      var dates = [];
 
-      for (var i=0; i<numDays; i++) {
-        days.push(i+1);
+      for (var i=0; i<numDates; i++) {
+        dates.push(i+1);
       }
 
-      return days;
+      return dates;
     }
 
     return {
@@ -63,19 +63,20 @@ angular.module('dateSelect', [])
       scope: true,
 
       link: function($scope, $element, attrs, model) {
+        $scope.val = {};
 
-        $scope.years = makeYears(); 
+        $scope.years = makeYears();
         $scope.months = makeMonths();
 
-        $scope.$watchCollection('[month, year]', function () {
-          $scope.days = makeDays($scope.year, $scope.month);
-          if ($scope.day > $scope.days.length) delete $scope.day;
+        $scope.$watchCollection('[val.month, val.year]', function () {
+          $scope.dates = makeDates($scope.val.year, $scope.val.month);
+          if ($scope.val.date > $scope.dates.length) delete $scope.val.date;
         });
 
-        $scope.$watchCollection('[day, month, year]', function () {
-          if ($scope.year && $scope.month && $scope.day) {
-            var m = moment([$scope.year, $scope.month-1, $scope.day]);
-            model.$setViewValue(m.toDate());
+        $scope.$watchCollection('[val.date, val.month, val.year]', function () {
+          if ($scope.val.year && $scope.val.month && $scope.val.date) {
+            var m = moment([$scope.val.year, $scope.val.month-1, $scope.val.date]);
+            model.$setViewValue(m.format('YYYY-MM-DD'));
           }
           else {
             model.$setViewValue();
@@ -88,11 +89,15 @@ angular.module('dateSelect', [])
 
           var m = moment(model.$viewValue);
 
-          $scope.day = m.day();
-          $scope.month = m.month();
-          $scope.year = m.year();
+          // Use an object to work around annoying angular scope issues
+          // inconjunction with custom-select directive
+          $scope.val = {
+            date: m.date(),
+            month: m.month()+1,
+            year: m.year()
+          };
         };
       }
     };
   }]);
-  
+
