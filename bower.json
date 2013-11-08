@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "~1.9.1",
-    "angular": "~1.2.0-rc.3",
+    "angular": "~1.2.0",
     "moment": "~2.4.0"
   },
   "devDependencies": {
-    "angular-scenario": "~1.2.0-rc.3"
+    "angular-scenario": "~1.2.0"
   },
   "main": [
     "src/date-select.js"
