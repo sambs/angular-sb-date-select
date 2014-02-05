@@ -6,55 +6,17 @@ angular.module('dateSelect', [])
 
     var template = [
       '<div class="date-select">',
-        '<select ng-model="val.date", ng-options="d for d in dates">', 
+        '<select class="date-select-day" ng-model="val.date", ng-options="d for d in dates">',
           '<option value disabled selected>Day</option>',
         '</select>',
-        '<select ng-model="val.month", ng-options="m.value as m.name for m in months">', 
+        '<select class="date-select-month" ng-model="val.month", ng-options="m.value as m.name for m in months">',
           '<option value disabled>Month</option>',
         '</select>',
-        '<select ng-model="val.year" ng-options="y for y in years">', 
+        '<select class="date-select-day" ng-model="val.year" ng-options="y for y in years">',
           '<option value disabled selected>Year</option>',
         '</select>',
       '</div>'
     ];
-
-    function makeYears () {
-      var years = [];
-      var maxYear = moment().year() - 16;
-
-      for (var i=maxYear; i>1900; i--) {
-        years.push(i);
-      }
-
-      return years;
-    }
-
-    function makeMonths () {
-      // We're starting months from 1 rather than 0 to permit easier boolean testing
-      var months = [];
-      var monthNames = moment.months();
-
-      for (var j=0; j<monthNames.length; j++) {
-        months.push({
-          name: monthNames[j],
-          value: j+1
-        });
-      }
-
-      return months;
-    }
-
-    function makeDates (year, month) {
-      var numDates = year && month ? moment([year, month-1]).daysInMonth() : 31;
-
-      var dates = [];
-
-      for (var i=0; i<numDates; i++) {
-        dates.push(i+1);
-      }
-
-      return dates;
-    }
 
     return {
       restrict: 'A',
@@ -66,12 +28,21 @@ angular.module('dateSelect', [])
       link: function(scope, elem, attrs, model) {
         scope.val = {};
 
-        scope.years = makeYears();
-        scope.months = makeMonths();
+        var min = scope.min = moment(attrs.min || '1900-01-01');
+        var max = scope.max = moment(attrs.max); // Defaults to now
+
+        scope.years = [];
+
+        for (var i=max.years(); i>=min.years(); i--) {
+          scope.years.push(i);
+        }
+
+        scope.$watch('val.year', function () {
+          updateMonthOptions();
+        });
 
         scope.$watchCollection('[val.month, val.year]', function () {
-          scope.dates = makeDates(scope.val.year, scope.val.month);
-          if (scope.val.date > scope.dates.length) delete scope.val.date;
+          updateDateOptions();
         });
 
         scope.$watchCollection('[val.date, val.month, val.year]', function () {
@@ -84,18 +55,61 @@ angular.module('dateSelect', [])
           }
         });
 
+        function updateMonthOptions () {
+          // Values begin at 1 to permit easier boolean testing
+          scope.months = [];
+
+          var minMonth = scope.val.year && min.isSame([scope.val.year], 'year') ? min.month() : 0;
+          var maxMonth = scope.val.year && max.isSame([scope.val.year], 'year') ? max.month() : 11;
+
+          var monthNames = moment.months();
+
+          for (var j=minMonth; j<=maxMonth; j++) {
+            scope.months.push({
+              name: monthNames[j],
+              value: j+1
+            });
+          }
+
+          if (scope.val.month-1 > maxMonth || scope.val.month-1 < minMonth) delete scope.val.month;
+        }
+
+        function updateDateOptions (year, month) {
+          var minDate, maxDate;
+
+          if (scope.val.year && scope.val.month && min.isSame([scope.val.year, scope.val.month-1], 'month')) {
+            minDate = min.date();
+          } else {
+            minDate = 1;
+          }
+
+          if (scope.val.year && scope.val.month && max.isSame([scope.val.year, scope.val.month-1], 'month')) {
+            maxDate = max.date();
+          } else if (scope.val.year && scope.val.month) { 
+            maxDate = moment([scope.val.year, scope.val.month-1]).daysInMonth();
+          } else {
+            maxDate = 31;
+          }
+
+          scope.dates = [];
+
+          for (var i=minDate; i<=maxDate; i++) {
+            scope.dates.push(i);
+          }
+          if (scope.val.date > scope.dates.length) delete scope.val.date;
+        }
+
         // model -> view
         model.$render = function() {
           if (!model.$viewValue) return;
 
           var m = moment(model.$viewValue);
 
-          // Use an object to work around annoying angular scope issues
-          // inconjunction with custom-select directive
+          // Always use a dot in ng-model attrs...
           scope.val = {
-            date: m.date(),
+            year: m.year(),
             month: m.month()+1,
-            year: m.year()
+            date: m.date()
           };
         };
       }

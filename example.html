@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Date Select Demo</title>
-  <script src="/bower_components/jquery/jquery.js"></script>
   <script src="/bower_components/moment/moment.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/src/date-select.js"></script>
@@ -21,44 +20,20 @@
       font-family: Arial, sans-serif;
       font-size: 13px;
     }
-    .dummy-input {
-      display: inline-block;
-      overflow: hidden;
-      padding: 3px 5px;
-      border: 1px solid #ccc;
-      width: 180px;
-      height: 1em;
-    }
-    .placeholder {
-      color: #bbb;
-    }
-    .dp-wrap, .dpt-wrap {
-      display: inline-block;
-    }
   </style>
-
 </head>
 <body ng-app="app">
   <div ng-controller="Controller">
     <form novalidate name="form">
-      <label>Before:</label>
-      <input type="text" ng-model="obj.before">
-      <br>
-      <br>
       <label>Date 1:</label>
       <div date-select ng-model="obj.date1"></div>
       <br>
-      <label>Date 2:</label>
-      <div date-select ng-model="obj.date2"></div>
+      <label>Date 2 (must be between May 10th 2001 &amp; November 24th 2008):</label>
+      <div date-select min="2001-05-10" max="2008-11-24" ng-model="obj.date2"></div>
       <br>
-      <br>
-      <label>After:</label>
-      <input type="text" ng-model="obj.after">
       <pre>
-Before: {{obj.before}}
 Date 1: {{obj.date1}}
 Date 2: {{obj.date2}}
-After: {{obj.after}}
       </pre>
     </form>
   </div>
