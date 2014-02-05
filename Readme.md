@@ -1,14 +1,9 @@
-An angular datepicker directive for ivo.
+Selection of dates using three select fields
+============================================
 
-Works with ISO 8601 date strings.
+Works with ISO 8601 date strings (YYYY-MM-DD).
 
-*Important!* Datefield only works properly if the ng-model attr is object property, not a direct property of the $scope, due to scoping issues (which is also the reason for using scope: true in the directive instead of passing through more attributes.
+Its advised not to use this directive on an input or select element to avoid confict regarding ngModel.$render.
 
-We're only using these modules from angular-ui-utils:
-  - modules/keypress/keypress.js
+This directive creates a new scope, so remember the best practice of always having a dot in your ng-model attrs.
 
-### To Do
-- Dont use on mobiles
-- Validation, especially for inbuilt pickers
-- Keyboard selection of date
-- Month & year view

@@ -3,6 +3,7 @@
 angular.module('dateSelect', [])
 
   .directive('dateSelect', [function () {
+
     var template = [
       '<div class="date-select">',
         '<select ng-model="val.date", ng-options="d for d in dates">', 

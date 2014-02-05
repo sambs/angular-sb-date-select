@@ -1,19 +1,9 @@
 {
-  "name": "angular-datepicker",
-  "version": "0.0.1",
-  "devDependencies": {
-    "grunt": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-jsonlint": "*",
-    "grunt-contrib-connect": "*",
-    "grunt-contrib-watch": "*"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
+  "name": "angular-date-select",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:ivow/angular-datepicker.git"
+    "url": "git@bitbucket.org:ivow/angular-date-select.git"
   },
   "author": "Sam Barnes",
   "license": "private",
