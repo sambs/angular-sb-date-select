@@ -63,20 +63,20 @@ angular.module('dateSelect', [])
       require: 'ngModel',
       scope: true,
 
-      link: function($scope, $element, attrs, model) {
-        $scope.val = {};
+      link: function(scope, elem, attrs, model) {
+        scope.val = {};
 
-        $scope.years = makeYears();
-        $scope.months = makeMonths();
+        scope.years = makeYears();
+        scope.months = makeMonths();
 
-        $scope.$watchCollection('[val.month, val.year]', function () {
-          $scope.dates = makeDates($scope.val.year, $scope.val.month);
-          if ($scope.val.date > $scope.dates.length) delete $scope.val.date;
+        scope.$watchCollection('[val.month, val.year]', function () {
+          scope.dates = makeDates(scope.val.year, scope.val.month);
+          if (scope.val.date > scope.dates.length) delete scope.val.date;
         });
 
-        $scope.$watchCollection('[val.date, val.month, val.year]', function () {
-          if ($scope.val.year && $scope.val.month && $scope.val.date) {
-            var m = moment([$scope.val.year, $scope.val.month-1, $scope.val.date]);
+        scope.$watchCollection('[val.date, val.month, val.year]', function () {
+          if (scope.val.year && scope.val.month && scope.val.date) {
+            var m = moment([scope.val.year, scope.val.month-1, scope.val.date]);
             model.$setViewValue(m.format('YYYY-MM-DD'));
           }
           else {
@@ -92,7 +92,7 @@ angular.module('dateSelect', [])
 
           // Use an object to work around annoying angular scope issues
           // inconjunction with custom-select directive
-          $scope.val = {
+          scope.val = {
             date: m.date(),
             month: m.month()+1,
             year: m.year()
