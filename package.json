@@ -1,5 +1,5 @@
 {
-  "name": "angular-date-select",
+  "name": "angular-sb-date-select",
   "version": "0.2.0",
   "devDependencies": {
     "karma": "~0.10.9",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:ivow/angular-date-select.git"
+    "url": "git@github.com:sambs/angular-sb-date-select.git"
   },
   "author": "Sam Barnes",
   "license": "MIT",

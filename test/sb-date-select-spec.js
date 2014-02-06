@@ -1,7 +1,7 @@
 
 describe('dateSelect directive', function () {
 
-  beforeEach(module('dateSelect'));
+  beforeEach(module('sbDateSelect'));
 
   var rootScope, compile, form, scope;
 
@@ -10,7 +10,7 @@ describe('dateSelect directive', function () {
     compile(form)(rootScope);
     rootScope.obj = {};
     rootScope.$digest();
-    scope = form.find('.date-select').scope();
+    scope = form.find('.sb-date-select').scope();
   }
 
   beforeEach(inject(function($injector) {
@@ -19,12 +19,12 @@ describe('dateSelect directive', function () {
   }));
 
   it('should replace element with three select inputs', function() {
-    compileToForm('<div date-select ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
     expect(form.find('select').length).toBe(3);
   });
 
   it('should update model only when year, month & date have been select', function() {
-    compileToForm('<div date-select ng-model="obj.mydate" name="mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate" name="mydate"></div>');
 
     scope.val.year = 1999;
     scope.val.month = 8;
@@ -41,34 +41,34 @@ describe('dateSelect directive', function () {
   });
 
   it('should have min default of 1900-01-01', function() {
-    compileToForm('<div date-select ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
     expect(moment('1900-01-01').isSame(scope.min, 'day')).toBe(true);
   });
 
   it('should have max default of today', function() {
-    compileToForm('<div date-select ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
     expect(moment().isSame(scope.max, 'day')).toBe(true);
   });
 
   it('should display all years between min and max', function() {
-    compileToForm('<div date-select ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
     expect(scope.years[0]).toBe(moment().year());
     expect(scope.years[scope.years.length-1]).toBe(1900);
   });
 
   it('should display all years between min and max', function() {
-    compileToForm('<div date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
     expect(scope.years[0]).toBe(1999);
     expect(scope.years[scope.years.length-1]).toBe(1990);
   });
 
   it('should display all months if no year selected', function() {
-    compileToForm('<div date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
     expect(scope.months.length).toBe(12);
   });
 
   it('should only display permitted months', function() {
-    compileToForm('<div date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
 
     scope.val.year = 1990;
     rootScope.$digest();
@@ -82,7 +82,7 @@ describe('dateSelect directive', function () {
   });
 
   it('should deselect month if year choice makes it invalid', function() {
-    compileToForm('<div date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
 
     scope.val.month = 4;
     rootScope.$digest();
@@ -94,12 +94,12 @@ describe('dateSelect directive', function () {
   });
 
   it('should display 31 dates if year and month not selected', function() {
-    compileToForm('<div date-select ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
     expect(scope.dates.length).toBe(31);
   });
 
   it('should display the right amount of dates for a selected year and month', function() {
-    compileToForm('<div date-select ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
 
     scope.val.year = 2013;
     scope.val.month = 2;
@@ -113,7 +113,7 @@ describe('dateSelect directive', function () {
   });
 
   it('should only display permitted dates', function() {
-    compileToForm('<div date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
 
     scope.val.year = 1990;
     scope.val.month = 5;
@@ -129,7 +129,7 @@ describe('dateSelect directive', function () {
   });
 
   it('should deselect date if month choice makes it invalid', function() {
-    compileToForm('<div date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
+    compileToForm('<div sb-date-select min="1990-05-10" max="1999-08-24" ng-model="obj.mydate"></div>');
 
     scope.val.date = 25;
     rootScope.$digest();

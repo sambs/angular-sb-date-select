@@ -12,11 +12,11 @@
       <form class="col-md-6" novalidate name="form">
         <div class="form-group">
           <label>Date 1</label>
-          <div date-select ng-model="obj.date1"></div>
+          <div sb-date-select ng-model="obj.date1"></div>
         </div>
         <div class="form-group">
           <label>Date 2</label>
-          <div date-select min="2001-05-10" max="2008-11-24" ng-model="obj.date2"></div>
+          <div sb-date-select min="2001-05-10" max="2008-11-24" ng-model="obj.date2"></div>
           <div class="help-block">Must be between May 10th 2001 &amp; November 24th 2008</div>
         </div>
       </form>
@@ -34,9 +34,9 @@
   <script>window.moment || document.write('<script src="/bower_components/moment/moment.js"><\/script>')</script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
   <script>window.angular || document.write('<script src="/bower_components/angular/angular.js"><\/script>')</script>
-  <script src="src/date-select.js"></script>
+  <script src="src/sb-date-select.js"></script>
   <script>
-    angular.module('app', ['dateSelect']).
+    angular.module('app', ['sbDateSelect']).
       controller('Controller', function ($scope) {
         $scope.obj = {
           date1: '1993-07-03',

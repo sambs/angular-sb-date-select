@@ -1,18 +1,18 @@
 /* global moment */
 
-angular.module('dateSelect', [])
+angular.module('sbDateSelect', [])
 
-  .directive('dateSelect', [function () {
+  .directive('sbDateSelect', [function () {
 
     var template = [
-      '<div class="date-select">',
-        '<select class="date-select-day" ng-model="val.date", ng-options="d for d in dates">',
+      '<div class="sb-date-select">',
+        '<select class="sb-date-select-day" ng-model="val.date", ng-options="d for d in dates">',
           '<option value disabled selected>Day</option>',
         '</select>',
-        '<select class="date-select-month" ng-model="val.month", ng-options="m.value as m.name for m in months">',
+        '<select class="sb-date-select-month" ng-model="val.month", ng-options="m.value as m.name for m in months">',
           '<option value disabled>Month</option>',
         '</select>',
-        '<select class="date-select-day" ng-model="val.year" ng-options="y for y in years">',
+        '<select class="sb-date-select-day" ng-model="val.year" ng-options="y for y in years">',
           '<option value disabled selected>Year</option>',
         '</select>',
       '</div>'
