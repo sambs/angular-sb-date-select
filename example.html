@@ -3,6 +3,32 @@
 <head>
   <meta charset="utf-8">
   <title>Date Select Demo</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+</head>
+<body ng-app="app">
+  <div class="container" ng-controller="Controller">
+    <h1>Date Select Example</h1>
+    <div class="row">
+      <form class="col-md-6" novalidate name="form">
+        <div class="form-group">
+          <label>Date 1</label>
+          <div date-select ng-model="obj.date1"></div>
+        </div>
+        <div class="form-group">
+          <label>Date 2</label>
+          <div date-select min="2001-05-10" max="2008-11-24" ng-model="obj.date2"></div>
+          <div class="help-block">Must be between May 10th 2001 &amp; November 24th 2008</div>
+        </div>
+      </form>
+      <div class="col-md-6">
+        <h3>Scope</h3>
+        <pre>
+  Date 1: {{obj.date1}}
+  Date 2: {{obj.date2}}
+        </pre>
+      </div>
+    </div>
+  </div>
   <script src="/bower_components/moment/moment.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/src/date-select.js"></script>
@@ -15,27 +41,5 @@
         }
       });
   </script>
-  <style>
-    body, input {
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-    }
-  </style>
-</head>
-<body ng-app="app">
-  <div ng-controller="Controller">
-    <form novalidate name="form">
-      <label>Date 1:</label>
-      <div date-select ng-model="obj.date1"></div>
-      <br>
-      <label>Date 2 (must be between May 10th 2001 &amp; November 24th 2008):</label>
-      <div date-select min="2001-05-10" max="2008-11-24" ng-model="obj.date2"></div>
-      <br>
-      <pre>
-Date 1: {{obj.date1}}
-Date 2: {{obj.date2}}
-      </pre>
-    </form>
-  </div>
 </body>
 </html>
