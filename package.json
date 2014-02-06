@@ -16,6 +16,6 @@
     "url": "git@bitbucket.org:ivow/angular-date-select.git"
   },
   "author": "Sam Barnes",
-  "license": "private",
+  "license": "MIT",
   "readmeFilename": "Readme.md"
 }
