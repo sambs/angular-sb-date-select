@@ -1,7 +1,7 @@
 Date input via date, month & year select fields
 ===============================================
 
-[![Build Status](https://travis-ci.org/sambs/angular-date-select.png?branch=master)](https://travis-ci.org/sambs/angular-date-select)
+[![Build Status](https://travis-ci.org/sambs/angular-sb-date-select.png?branch=master)](https://travis-ci.org/sambs/angular-sb-date-select)
 
  - Reads and writes ISO 8601 date strings (YYYY-MM-DD) to your model
  - Supports min and max attrs
@@ -10,7 +10,7 @@ Date input via date, month & year select fields
 
 Its advised not to use this directive on an input or select element to avoid confict regarding ngModel.$render. Also be aware that a new scope is created, so remember the best practice of always having a dot in your ng-model attrs.
 
-[Example](http://sambs.github.io/angular-date-select/)
+[Example](http://sambs.github.io/angular-sb-date-select/)
 
 License
 -------
