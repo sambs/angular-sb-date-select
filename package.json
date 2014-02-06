@@ -9,7 +9,7 @@
     "karma-sauce-launcher": "~0.1.8"
   },
   "scripts": {
-    "test": "karma start test/karma-conf.js --single-run"
+    "test": "node_modules/.bin/karma start test/karma-conf.js --single-run --browsers Firefox"
   },
   "repository": {
     "type": "git",
