@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
           <label>Date 2</label>
-          <div sb-date-select min="2001-05-10" max="2008-11-24" ng-model="obj.date2"></div>
+          <div sb-date-select min="{{date2Min}}" max="2008-11-24" ng-model="obj.date2"></div>
           <div class="help-block">Must be between May 10th 2001 &amp; November 24th 2008</div>
         </div>
       </form>
@@ -42,6 +42,7 @@
           date1: '1993-07-03',
           date2: null,
         }
+        $scope.date2Min = '2001-05-10';
       });
   </script>
 </body>
