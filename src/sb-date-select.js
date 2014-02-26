@@ -12,7 +12,7 @@ angular.module('sbDateSelect', [])
         '<select class="sb-date-select-month" ng-model="val.month", ng-options="m.value as m.name for m in months">',
           '<option value disabled>Month</option>',
         '</select>',
-        '<select class="sb-date-select-day" ng-model="val.year" ng-options="y for y in years">',
+        '<select class="sb-date-select-year" ng-model="val.year" ng-options="y for y in years">',
           '<option value disabled selected>Year</option>',
         '</select>',
       '</div>'
