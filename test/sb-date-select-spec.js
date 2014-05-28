@@ -141,4 +141,19 @@ describe('dateSelect directive', function () {
     expect(scope.val.date).toBe(undefined);
   });
 
+  it('shouldnt deselect valid dates', function() {
+    compileToForm('<div sb-date-select min="1990-05-20" max="1999-08-24" ng-model="obj.mydate"></div>');
+
+    rootScope.obj.mydate = '1990-05-20';
+    rootScope.$digest();
+    expect(scope.val.date).toBe(20);
+    expect(scope.val.month).toBe(05);
+    expect(scope.val.year).toBe(1990);
+
+    rootScope.obj.mydate = '1999-08-24';
+    rootScope.$digest();
+    expect(scope.val.date).toBe(24);
+    expect(scope.val.month).toBe(08);
+    expect(scope.val.year).toBe(1999);
+  });
 });

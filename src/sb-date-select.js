@@ -96,7 +96,7 @@ angular.module('sbDateSelect', [])
           for (var i=minDate; i<=maxDate; i++) {
             scope.dates.push(i);
           }
-          if (scope.val.date > scope.dates.length) delete scope.val.date;
+          if (scope.val.date < minDate || scope.val.date > maxDate) delete scope.val.date;
         }
 
         // model -> view
