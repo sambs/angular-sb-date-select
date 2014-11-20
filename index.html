@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <title>Date Select Demo</title>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <style>
+    .sb-date-select-select {
+      display: inline-block;
+      width: 100px;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body ng-app="app">
   <div class="container" ng-controller="Controller">
@@ -12,11 +19,11 @@
       <form class="col-md-6" novalidate name="form">
         <div class="form-group">
           <label>Date 1</label>
-          <div sb-date-select ng-model="obj.date1"></div>
+          <div sb-date-select sb-select-class="form-control" ng-model="obj.date1"></div>
         </div>
         <div class="form-group">
           <label>Date 2</label>
-          <div sb-date-select min="{{date2Min}}" max="2008-11-24" ng-model="obj.date2"></div>
+          <div sb-date-select sb-select-class="form-control" min="{{date2Min}}" max="2008-11-24" ng-model="obj.date2"></div>
           <div class="help-block">Must be between May 10th 2001 &amp; November 24th 2008</div>
         </div>
       </form>
