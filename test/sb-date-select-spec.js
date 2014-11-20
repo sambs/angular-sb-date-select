@@ -10,7 +10,7 @@ describe('dateSelect directive', function () {
     compile(form)(rootScope);
     rootScope.obj = {};
     rootScope.$digest();
-    scope = form.find('.sb-date-select').scope();
+    scope = form.find('.sb-date-select').isolateScope();
   }
 
   beforeEach(inject(function($injector) {
