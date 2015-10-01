@@ -35,7 +35,7 @@ angular.module('sbDateSelect', [])
 
         scope.years = [];
 
-        for (var i=max.years(); i>=min.years(); i--) {
+        for (var i=max.year(); i>=min.year(); i--) {
           scope.years.push(i);
         }
 
