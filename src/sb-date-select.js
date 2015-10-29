@@ -6,7 +6,7 @@ angular.module('sbDateSelect', [])
 
     var template = [
       '<div class="sb-date-select">',
-        '<select class="sb-date-select-day sb-date-select-select" ng-class="selectClass" ng-model="val.date", ng-options="d for d in dates">',
+        '<select class="sb-date-select-day sb-date-select-select" ng-class="selectClass" ng-model="val.date", ng-options="d for d in dates track by d">',
           '<option value disabled selected>Day</option>',
         '</select>',
         '<select class="sb-date-select-month sb-date-select-select" ng-class="selectClass" ng-model="val.month", ng-options="m.value as m.name for m in months">',
