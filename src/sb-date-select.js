@@ -2,7 +2,7 @@
 
 angular.module('sbDateSelect', [])
 
-  .directive('sbDateSelect', [function () {
+  .run(["$templateCache", function ($templateCache) {
 
     var template = [
       '<div class="sb-date-select">',
@@ -18,10 +18,18 @@ angular.module('sbDateSelect', [])
       '</div>'
     ];
 
+    $templateCache.put("sb-date-select.html", template.join(''));
+
+  }])
+
+  .directive('sbDateSelect', [function () {
+
     return {
       restrict: 'A',
       replace: true,
-      template: template.join(''),
+      templateUrl: function ($element, $attrs) {
+        return $attrs.templateUrl || 'sb-date-select.html'
+      },
       require: 'ngModel',
       scope: {
         selectClass: '@sbSelectClass'
@@ -87,7 +95,7 @@ angular.module('sbDateSelect', [])
 
           if (scope.val.year && scope.val.month && max.isSame([scope.val.year, scope.val.month-1], 'month')) {
             maxDate = max.date();
-          } else if (scope.val.year && scope.val.month) { 
+          } else if (scope.val.year && scope.val.month) {
             maxDate = moment([scope.val.year, scope.val.month-1]).daysInMonth();
           } else {
             maxDate = 31;
@@ -117,4 +125,3 @@ angular.module('sbDateSelect', [])
       }
     };
   }]);
-
