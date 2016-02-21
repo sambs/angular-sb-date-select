@@ -2,14 +2,14 @@
 
 angular.module('sbDateSelect', [])
 
-  .run(["$templateCache", function ($templateCache) {
+  .run(['$templateCache', function ($templateCache) {
 
     var template = [
       '<div class="sb-date-select">',
-        '<select class="sb-date-select-day sb-date-select-select" ng-class="selectClass" ng-model="val.date", ng-options="d for d in dates track by d">',
+        '<select class="sb-date-select-day sb-date-select-select" ng-class="selectClass" ng-model="val.date" ng-options="d for d in dates track by d">',
           '<option value disabled selected>Day</option>',
         '</select>',
-        '<select class="sb-date-select-month sb-date-select-select" ng-class="selectClass" ng-model="val.month", ng-options="m.value as m.name for m in months">',
+        '<select class="sb-date-select-month sb-date-select-select" ng-class="selectClass" ng-model="val.month" ng-options="m.value as m.name for m in months">',
           '<option value disabled>Month</option>',
         '</select>',
         '<select class="sb-date-select-year sb-date-select-select" ng-class="selectClass" ng-model="val.year" ng-options="y for y in years">',
@@ -18,7 +18,7 @@ angular.module('sbDateSelect', [])
       '</div>'
     ];
 
-    $templateCache.put("sb-date-select.html", template.join(''));
+    $templateCache.put('sb-date-select.html', template.join(''));
 
   }])
 
@@ -28,7 +28,7 @@ angular.module('sbDateSelect', [])
       restrict: 'A',
       replace: true,
       templateUrl: function ($element, $attrs) {
-        return $attrs.templateUrl || 'sb-date-select.html'
+        return $attrs.templateUrl || 'sb-date-select.html';
       },
       require: 'ngModel',
       scope: {
