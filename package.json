@@ -6,10 +6,12 @@
     "karma-jasmine": "~0.1.5",
     "karma-chrome-launcher": "~0.1.2",
     "karma-firefox-launcher": "~0.1.3",
-    "karma-sauce-launcher": "~0.1.8"
+    "karma-sauce-launcher": "~0.1.8",
+    "uglify-js": "^3.0.4"
   },
   "scripts": {
-    "test": "node_modules/.bin/karma start test/karma-conf.js --single-run --browsers Firefox"
+    "test": "node_modules/.bin/karma start test/karma-conf.js --single-run --browsers Firefox",
+    "dist": "mkdir -p dist && uglifyjs --mangle --compress --output dist/sb-date-select.min.js -- src/sb-date-select.js"
   },
   "repository": {
     "type": "git",
