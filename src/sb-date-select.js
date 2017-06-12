@@ -106,7 +106,7 @@ angular.module('sbDateSelect', [])
           if (scope.val.date < minDate || scope.val.date > maxDate) delete scope.val.date;
         }
 
-        scope.val.updateYears = function(years){
+        scope.val.updateMaxDate = function(years){
           max = moment(years);
           scope.years = [];
           fillYears();
