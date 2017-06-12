@@ -24,18 +24,22 @@ angular.module('sbDateSelect', [])
       template: template.join(''),
       require: 'ngModel',
       scope: {
-        selectClass: '@sbSelectClass'
+        selectClass: '@sbSelectClass',
+        min: '@min',
+        max: '@max'
       },
 
       link: function(scope, elem, attrs, model) {
-        var min = scope.min = moment(attrs.min || '1900-01-01');
-        var max = scope.max = moment(attrs.max); // Defaults to now
+        var min, max; 
+        
+        scope.$watchCollection('[min, max]', function(vals) {
+          min = moment(vals[0] || '1900-01-01');
+          max = moment(vals[1]); // Defaults to now
 
-        scope.years = [];
-
-        for (var i=max.year(); i>=min.year(); i--) {
-          scope.years.push(i);
-        }
+          updateDateOptions();
+          updateMonthOptions();
+          updateYearOptions();
+        })
 
         scope.$watch('year', function () {
           updateMonthOptions();
@@ -54,6 +58,14 @@ angular.module('sbDateSelect', [])
             model.$setViewValue();
           }
         });
+
+        function updateYearOptions() {
+          scope.years = [];
+
+          for (var i=max.year(); i>=min.year(); i--) {
+            scope.years.push(i);
+          }
+        }
 
         function updateMonthOptions () {
           // Values begin at 1 to permit easier boolean testing

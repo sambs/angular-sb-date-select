@@ -40,17 +40,7 @@ describe('dateSelect directive', function () {
     expect(rootScope.obj.mydate).toBe(undefined);
   });
 
-  it('should have min default of 1900-01-01', function() {
-    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
-    expect(moment('1900-01-01').isSame(scope.min, 'day')).toBe(true);
-  });
-
-  it('should have max default of today', function() {
-    compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
-    expect(moment().isSame(scope.max, 'day')).toBe(true);
-  });
-
-  it('should display all years between min and max', function() {
+  it('should display all years between default min and max', function() {
     compileToForm('<div sb-date-select ng-model="obj.mydate"></div>');
     expect(scope.years[0]).toBe(moment().year());
     expect(scope.years[scope.years.length-1]).toBe(1900);
