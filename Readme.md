@@ -10,7 +10,25 @@ Date input via date, month & year select fields
 
 Its advised not to use this directive on an input or select element to avoid confict regarding ngModel.$render. Also be aware that a new scope is created, so remember the best practice of always having a dot in your ng-model attrs.
 
-[Example](http://sambs.github.io/angular-sb-date-select/)
+[Demo](http://sambs.github.io/angular-sb-date-select/)
+
+Example:
+```html
+<div class="sb-date-select" sb-date-select="" ng-model="myModel.birthday" max="1995-07-07">
+</div>
+```
+
+If you need to change max date:
+```js
+$scope.myControl = {};
+$scope.myClick = function(){
+  $scope.myControl.updateMaxDate('2005-07-07');
+}
+```
+```html
+<div class="sb-date-select" sb-date-select="" ng-model="myModel.birthday" max="1995-07-07" control="myControl">
+</div>
+```
 
 License
 -------
