@@ -24,25 +24,20 @@ angular.module('sbDateSelect', [])
       template: template.join(''),
       require: 'ngModel',
       scope: {
-        selectClass: '@sbSelectClass',
-        control: '='
+        selectClass: '@sbSelectClass'
       },
 
       link: function(scope, elem, attrs, model) {
-        scope.val = scope.control || {};
+        scope.val = {};
 
         var min = scope.min = moment(attrs.min || '1900-01-01');
         var max = scope.max = moment(attrs.max); // Defaults to now
 
         scope.years = [];
 
-        function fillYears(){
-          for (var i=max.year(); i>=min.year(); i--) {
-            scope.years.push(i);
-          }
+        for (var i=max.year(); i>=min.year(); i--) {
+          scope.years.push(i);
         }
-
-        fillYears();
 
         scope.$watch('val.year', function () {
           updateMonthOptions();
@@ -92,7 +87,7 @@ angular.module('sbDateSelect', [])
 
           if (scope.val.year && scope.val.month && max.isSame([scope.val.year, scope.val.month-1], 'month')) {
             maxDate = max.date();
-          } else if (scope.val.year && scope.val.month) {
+          } else if (scope.val.year && scope.val.month) { 
             maxDate = moment([scope.val.year, scope.val.month-1]).daysInMonth();
           } else {
             maxDate = 31;
@@ -104,12 +99,6 @@ angular.module('sbDateSelect', [])
             scope.dates.push(i);
           }
           if (scope.val.date < minDate || scope.val.date > maxDate) delete scope.val.date;
-        }
-
-        scope.val.updateMaxDate = function(years){
-          max = moment(years);
-          scope.years = [];
-          fillYears();
         }
 
         // model -> view
@@ -128,3 +117,4 @@ angular.module('sbDateSelect', [])
       }
     };
   }]);
+
