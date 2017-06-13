@@ -11,5 +11,12 @@
   },
   "main": [
     "src/sb-date-select.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "*.md",
+    "*.html",
+    "test",
+    "package.json"
   ]
 }
