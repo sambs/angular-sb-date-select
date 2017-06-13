@@ -12,7 +12,7 @@ angular.module('sbDateSelect', [])
         '<select class="sb-date-select-month sb-date-select-select" ng-class="selectClass" ng-model="val.month", ng-options="m.value as m.name for m in months">',
           '<option value disabled>Month</option>',
         '</select>',
-        '<select class="sb-date-select-year sb-date-select-select" ng-class="selectClass" ng-model="val.year" ng-options="y for y in years">',
+        '<select class="sb-date-select-year sb-date-select-select" ng-class="selectClass" ng-model="val.year" ng-options="y for y in ::years">',
           '<option value disabled selected>Year</option>',
         '</select>',
       '</div>'
@@ -87,7 +87,7 @@ angular.module('sbDateSelect', [])
 
           if (scope.val.year && scope.val.month && max.isSame([scope.val.year, scope.val.month-1], 'month')) {
             maxDate = max.date();
-          } else if (scope.val.year && scope.val.month) { 
+          } else if (scope.val.year && scope.val.month) {
             maxDate = moment([scope.val.year, scope.val.month-1]).daysInMonth();
           } else {
             maxDate = 31;
@@ -117,4 +117,3 @@ angular.module('sbDateSelect', [])
       }
     };
   }]);
-
