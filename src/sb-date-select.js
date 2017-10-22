@@ -30,7 +30,8 @@ angular.module('sbDateSelect', [])
       },
 
       link: function(scope, elem, attrs, model) {
-        var min, max; 
+        var min, max;
+        var format = attrs.sbDateFormat || 'YYYY-MM-DD';
         
         scope.$watchCollection('[min, max]', function(vals) {
           min = moment(vals[0] || '1900-01-01');
@@ -52,7 +53,7 @@ angular.module('sbDateSelect', [])
         scope.$watchCollection('[date, month, year]', function () {
           if (scope.year && scope.month && scope.date) {
             var m = moment([scope.year, scope.month-1, scope.date]);
-            model.$setViewValue(m.format('YYYY-MM-DD'));
+            model.$setViewValue(format === 'toDate' ? m.toDate() : m.format(format));
           }
           else {
             model.$setViewValue();
